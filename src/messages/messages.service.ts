@@ -1,12 +1,9 @@
 import { MessagesRepository } from './messages.repository';
-import { NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 
+@Injectable()
 export class MessagesService {
-  messagesRepo: MessagesRepository;
-
-  constructor() {
-    this.messagesRepo = new MessagesRepository();
-  }
+  constructor(private readonly messagesRepo: MessagesRepository) {}
 
   findOne(id: string) {
     const message = this.messagesRepo.findOne(id);
